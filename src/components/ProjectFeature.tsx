@@ -13,7 +13,7 @@ export function ProjectFeature({ project, index }: ProjectFeatureProps) {
   return (
     <article className="project-feature" data-testid="featured-project">
       <a className="project-media" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name} website`}>
-        {imageFailed ? (
+        {imageFailed || !project.preview ? (
           <div className={`preview-fallback preview-fallback-${(index % 6) + 1}`} role="img" aria-label={project.previewAlt}>
             <span>{project.name}</span>
           </div>

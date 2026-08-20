@@ -27,7 +27,7 @@ export const featuredProjects: Project[] = [
     description: 'A high-impact customer site paired with useful tools for branches, queues, inquiries, and operations.',
     url: 'https://auto-detailingand-carwash.vercel.app',
     featured: true,
-    preview: '/previews/hakum-auto-care.webp',
+    preview: '',
     previewAlt: 'Hakum Auto Care website homepage',
   },
   {
@@ -37,7 +37,7 @@ export const featuredProjects: Project[] = [
     description: 'A vivid restaurant experience built around fire, produce, people, and appetite.',
     url: 'https://kaenmanila.vercel.app',
     featured: true,
-    preview: '/previews/kaen-manila.webp',
+    preview: '',
     previewAlt: 'Kaen Manila website homepage',
   },
   {
@@ -47,7 +47,7 @@ export const featuredProjects: Project[] = [
     description: 'A reassuring dental experience that turns treatment discovery into simple appointment booking.',
     url: 'https://optrizodentistry.vercel.app',
     featured: true,
-    preview: '/previews/optrizo-dentistry.webp',
+    preview: '',
     previewAlt: 'Optrizo Dentistry website homepage',
   },
   {
@@ -57,7 +57,7 @@ export const featuredProjects: Project[] = [
     description: 'A vibrant rooftop pickleball destination with clear venue information and booking pathways.',
     url: 'https://skycourtrooftop.vercel.app',
     featured: true,
-    preview: '/previews/skycourt.webp',
+    preview: '',
     previewAlt: 'SkyCourt rooftop pickleball website homepage',
   },
   {
@@ -67,7 +67,7 @@ export const featuredProjects: Project[] = [
     description: 'A friendly financial dashboard that turns daily business numbers into a clear picture.',
     url: 'https://linawfinance.vercel.app',
     featured: true,
-    preview: '/previews/linaw-finance.webp',
+    preview: '',
     previewAlt: 'Linaw Finance product homepage',
   },
   {
@@ -77,7 +77,7 @@ export const featuredProjects: Project[] = [
     description: 'A scent-led storefront that helps shoppers discover a signature fragrance.',
     url: 'https://queperfumery.vercel.app',
     featured: true,
-    preview: '/previews/que-perfumery.webp',
+    preview: '',
     previewAlt: 'Que Perfumery online store homepage',
   },
 ]
