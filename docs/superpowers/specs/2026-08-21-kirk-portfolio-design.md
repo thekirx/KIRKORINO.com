@@ -34,7 +34,7 @@ The approved direction is **Curated Studio** with an **Ink + Electric Blue** vis
 - Layout: open editorial composition, large project imagery, alternating project rows, minimal framing, and strong whitespace.
 - Project imagery supplies most secondary color; the portfolio itself remains restrained.
 - Corners are modestly rounded. Avoid excessive cards, pills, gradients, glass effects, or decorative dashboard chrome.
-- Motion is subtle: hover lift, image scale, text reveal, and section entrance only. Respect `prefers-reduced-motion`.
+- Motion is limited to lightweight CSS hover and focus transitions. Do not add scroll-triggered animation or an animation library. Respect `prefers-reduced-motion`.
 
 ## Information Architecture
 
@@ -113,7 +113,7 @@ The archive follows selected work in a dark band. It includes every other workin
 - RepMetric / 360 — `https://repmetric-360.vercel.app`
 - Reservation — `https://reservation-six-blush.vercel.app`
 
-Provide category filters for `All`, `Business Websites`, `Hospitality`, `Sports & Wellness`, `Retail`, and `Software & Systems`. Filters only change visible archive items and expose clear selected states. The default is `All`.
+Organize the archive as a simple responsive list grouped by category. Do not add interactive filtering in the lean initial release.
 
 `mvpgetmeds` is excluded because its latest Vercel deployment is in an error state. It may be added after a working production deployment is verified.
 
@@ -157,7 +157,6 @@ The Vercel inventory is a discovery source only. Updating the portfolio for a ne
 
 - Smooth anchored navigation with a reduced-motion fallback.
 - Hover and focus treatments for all links and project rows.
-- Archive category filtering with keyboard-accessible buttons and an announced result count.
 - Live project links open securely in a new tab with `noopener noreferrer`.
 - Email and phone actions use native `mailto:` and `tel:` links.
 - Project images may reveal a subtle zoom or directional cue on hover but remain static when reduced motion is preferred.
@@ -190,7 +189,6 @@ Use React with Vite for a lightweight static portfolio. Keep the project catalog
 - `SelectedWork`
 - `ProjectFeature`
 - `ProjectArchive`
-- `ArchiveFilters`
 - `About`
 - `ContactCTA`
 - `Footer`
@@ -206,7 +204,7 @@ Before completion:
 - Confirm the approved hero copy, navigation labels, section order, six featured projects, and CTA copy have not drifted.
 - Open every live project link and confirm it reaches the intended production site.
 - Verify email and phone actions contain the correct address and normalized phone number.
-- Test all archive filters, focus states, keyboard navigation, reduced motion, and image fallbacks.
+- Test focus states, keyboard navigation, reduced motion, and image fallbacks.
 - Check that project images load without obscuring text or causing large layout shifts.
 - Run the available build, lint, and automated tests.
 - Inspect for horizontal overflow, clipped content, accidental wrapping, or browser-default control typography.
@@ -220,3 +218,5 @@ Before completion:
 - Testimonials or performance metrics that have not been supplied and verified
 - Individual long-form case-study pages
 - Automatic deployment of new Vercel projects into the archive
+- Interactive archive filters
+- Scroll-triggered or choreography-heavy animation
