@@ -34,4 +34,8 @@ describe('project catalog', () => {
       Boolean(featureHeadline?.trim() && featureSummary?.trim()),
     )).toBe(true)
   })
+
+  it('leads every featured case study with the brand name', () => {
+    expect(featuredProjects.every(({ name, featureHeadline }) => featureHeadline === name)).toBe(true)
+  })
 })
