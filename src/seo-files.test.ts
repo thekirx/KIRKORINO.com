@@ -1,14 +1,14 @@
-import { readFile } from 'node:fs/promises'
 import { describe, expect, it } from 'vitest'
+import indexHtml from '../index.html?raw'
+import robots from '../public/robots.txt?raw'
+import sitemap from '../public/sitemap.xml?raw'
 
-const projectPath = `${process.cwd()}/`
-const readProjectFile = (path: string) => readFile(`${projectPath}${path}`, 'utf8')
 const title = 'Kirk Orino | Web Designer & Developer in the Philippines'
 const description = 'Portfolio of Kirk Orino, a web designer and developer creating modern websites, web applications, UI/UX experiences, and business systems in the Philippines.'
 
 describe('static SEO files', () => {
-  it('publishes canonical homepage and social metadata', async () => {
-    const document = new DOMParser().parseFromString(await readProjectFile('index.html'), 'text/html')
+  it('publishes canonical homepage and social metadata', () => {
+    const document = new DOMParser().parseFromString(indexHtml, 'text/html')
 
     expect.soft(document.title).toBe(title)
     expect.soft(document.querySelector('meta[name="description"]')?.getAttribute('content')).toBe(description)
@@ -28,8 +28,8 @@ describe('static SEO files', () => {
     )
   })
 
-  it('publishes valid Person structured data without invented profiles', async () => {
-    const document = new DOMParser().parseFromString(await readProjectFile('index.html'), 'text/html')
+  it('publishes valid Person structured data without invented profiles', () => {
+    const document = new DOMParser().parseFromString(indexHtml, 'text/html')
     const script = document.querySelector('script[type="application/ld+json"]')
     const data = JSON.parse(script?.textContent ?? '')
 
@@ -44,12 +44,7 @@ describe('static SEO files', () => {
     expect(data).not.toHaveProperty('sameAs')
   })
 
-  it('allows the homepage and lists only its canonical URL', async () => {
-    const [robots, sitemap] = await Promise.all([
-      readProjectFile('public/robots.txt'),
-      readProjectFile('public/sitemap.xml'),
-    ])
-
+  it('allows the homepage and lists only its canonical URL', () => {
     expect(robots).toBe('User-agent: *\nAllow: /\n\nSitemap: https://kirkorino.com/sitemap.xml\n')
     expect(sitemap).toContain('<loc>https://kirkorino.com/</loc>')
     expect(sitemap).not.toContain('.vercel.app')
