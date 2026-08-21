@@ -18,16 +18,16 @@
 | Archive | Dense black numbered list | Sixteen working projects appear in a high-contrast editorial index | Matched |
 | Contact close | Oversized electric-blue new-business section | Email and phone actions sit below the approved statement | Matched |
 | Mobile collapse | Strong type and sequence retained at narrow widths | At 700px all case studies become one column, media becomes 4:3, secondary metadata is removed, and actions remain readable; 320px minimum is supported | Implemented |
-| Motion | Editorial hierarchy should feel deliberate rather than decorative | Staggered hero entrance, one-time viewport reveals, directional link motion, and restrained image scaling preserve the grid and copy | Matched |
+| Motion | Editorial hierarchy should feel deliberate rather than decorative | Staggered entrance, one-time viewport reveals, touch-dragged hero words, word-specific desktop opacity, directional links, and restrained image scaling preserve the grid and copy | Matched |
 | Accessibility | Keyboard-visible actions and semantic hierarchy | Landmarks, labelled external links, alt text/fallbacks, focus styles, and reduced-motion handling are present | Verified in tests |
 
 ## Automated Evidence
 
-- `npm run test:run`: 4 files, 11 tests passing.
+- `npm run test:run`: 5 files, 12 tests passing.
 - `npm run build`: production build succeeds.
 - `git diff --check`: no whitespace errors.
 - Inventory: 7 featured projects and 16 archive projects; Tongits and Valentine invitation are excluded.
 
 ## Browser Evidence
 
-The local Vite site is verified at `http://127.0.0.1:5173/` at 1280px desktop and 390px mobile widths. The browser confirmed 45 reveal targets, an active hero entrance animation, progressive reveal after navigating to `#work`, no framework overlay, no console warnings or errors, and no horizontal overflow. Every featured brand heading remained within its mobile container. The responsive CSS contains explicit 900px, 700px, and 360px adaptations, with the layout supported down to the required 320px minimum width.
+The local Vite site is verified at `http://127.0.0.1:5173/` at 1280px desktop and 390px mobile widths. Desktop pointer testing confirmed that hovering directly over `Kirk` transitions its opacity from `1` to `0.24` and restores it to `1` on exit; the hit area matches the 412px text width rather than the full row. Mobile verification confirmed `touch-action: pan-y`, no horizontal overflow, and a title width equal to its container. The touch interaction test confirms movement is capped at 24px, `Orino` counter-moves, and both words reset on release. No framework overlay or console warnings/errors were present.

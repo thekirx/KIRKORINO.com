@@ -1,4 +1,5 @@
 import { ArrowIcon } from './ArrowIcon'
+import { FluidHeroTitle } from './FluidHeroTitle'
 
 const capabilities = ['Brand websites', 'E-commerce', 'Booking systems', 'Business software', 'Responsive development']
 
@@ -10,7 +11,7 @@ export function Hero() {
         <p>Selected work / 2026</p>
         <p>Manila, PH</p>
       </div>
-      <h1 className="hero-title"><span>Kirk</span>{' '}<span>Orino</span></h1>
+      <FluidHeroTitle />
       <div className="hero-foot" data-reveal>
         <p>I build sharp digital identities and useful websites for businesses that deserve to be noticed.</p>
         <a className="editorial-link" href="#work">Explore selected work <ArrowIcon direction="down" /></a>
