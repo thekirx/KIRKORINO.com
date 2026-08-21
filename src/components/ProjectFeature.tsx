@@ -18,7 +18,13 @@ export function ProjectFeature({ project, index }: ProjectFeatureProps) {
             <span>{project.name}</span>
           </div>
         ) : (
-          <img src={project.preview} alt={project.previewAlt} loading={index === 0 ? 'eager' : 'lazy'} onError={() => setImageFailed(true)} />
+          <img
+            className={`project-image project-image-${project.slug}`}
+            src={project.preview}
+            alt={project.previewAlt}
+            loading={index === 0 ? 'eager' : 'lazy'}
+            onError={() => setImageFailed(true)}
+          />
         )}
       </a>
       <div className="project-copy">

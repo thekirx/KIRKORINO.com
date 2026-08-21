@@ -79,7 +79,7 @@ Display these capabilities in a blue horizontal band:
 
 ### Selected work
 
-Feature six projects chosen to demonstrate range. Each entry includes a large current-site screenshot, category, short description, and a `View live project` link.
+Feature seven projects chosen to demonstrate range. Each entry includes a large current-site image or branded fallback, category, short description, and a `View live project` link.
 
 1. **Hakum Auto Care** — Automotive; website and operations. Live URL: `https://auto-detailingand-carwash.vercel.app`.
 2. **Kaen Manila** — Hospitality; brand website. Live URL: `https://kaenmanila.vercel.app`.
@@ -87,6 +87,7 @@ Feature six projects chosen to demonstrate range. Each entry includes a large cu
 4. **SkyCourt** — Sports; venue website. Live URL: `https://skycourtrooftop.vercel.app`.
 5. **Linaw Finance** — Software; business intelligence. Live URL: `https://linawfinance.vercel.app`.
 6. **Que Perfumery** — Retail; e-commerce. Live URL: `https://queperfumery.vercel.app`.
+7. **Casa Uno Villas** — Hospitality; direct-booking villa experience. Live URL: `https://casa-uno-villas.vercel.app`.
 
 Use alternating wide/narrow compositions instead of a repeated card grid. Descriptions must focus on the type of experience or business problem addressed, without inventing performance results.
 
@@ -106,10 +107,8 @@ The archive follows selected work in a dark band. It includes every other workin
 - Delta Sports Arena — `https://deltasports.vercel.app`
 - Dink Arena PH — `https://dinkarenaph.vercel.app`
 - MobileCart PH — `https://mobilecartph.vercel.app`
-- Pa-Tongits ni Konsi — `https://patongitsnikonsi.vercel.app`
 - Currency Conversion Simulator — `https://currencysite.vercel.app`
 - Suncolor Graphics — `https://suncolordraft.vercel.app`
-- Valentine’s Invitation — `https://openmekyky.vercel.app`
 - RepMetric / 360 — `https://repmetric-360.vercel.app`
 - Reservation — `https://reservation-six-blush.vercel.app`
 
@@ -201,7 +200,7 @@ Before completion:
 
 - Compare the rendered desktop homepage against the approved Curated Studio / Ink + Electric Blue concept.
 - Verify desktop, tablet, and mobile layouts.
-- Confirm the approved hero copy, navigation labels, section order, six featured projects, and CTA copy have not drifted.
+- Confirm the approved hero copy, navigation labels, section order, seven featured projects, and CTA copy have not drifted.
 - Open every live project link and confirm it reaches the intended production site.
 - Verify email and phone actions contain the correct address and normalized phone number.
 - Test focus states, keyboard navigation, reduced motion, and image fallbacks.

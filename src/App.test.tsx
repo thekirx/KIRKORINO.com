@@ -19,11 +19,11 @@ describe('portfolio page', () => {
     )
   })
 
-  it('renders six featured links and all eighteen archive links securely', () => {
+  it('renders seven featured links and all sixteen archive links securely', () => {
     render(<App />)
 
-    expect(screen.getAllByTestId('featured-project')).toHaveLength(6)
-    expect(screen.getAllByTestId('archive-project')).toHaveLength(18)
+    expect(screen.getAllByTestId('featured-project')).toHaveLength(7)
+    expect(screen.getAllByTestId('archive-project')).toHaveLength(16)
     for (const link of screen.getAllByRole('link', { name: /view live project/i })) {
       expect(link).toHaveAttribute('target', '_blank')
       expect(link).toHaveAttribute('rel', 'noopener noreferrer')

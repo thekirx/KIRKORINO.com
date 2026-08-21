@@ -27,7 +27,7 @@ export const featuredProjects: Project[] = [
     description: 'A high-impact customer site paired with useful tools for branches, queues, inquiries, and operations.',
     url: 'https://auto-detailingand-carwash.vercel.app',
     featured: true,
-    preview: '',
+    preview: '/previews/hakum-auto-care.webp',
     previewAlt: 'Hakum Auto Care website homepage',
   },
   {
@@ -37,7 +37,7 @@ export const featuredProjects: Project[] = [
     description: 'A vivid restaurant experience built around fire, produce, people, and appetite.',
     url: 'https://kaenmanila.vercel.app',
     featured: true,
-    preview: '',
+    preview: '/previews/kaen-manila.avif',
     previewAlt: 'Kaen Manila website homepage',
   },
   {
@@ -57,7 +57,7 @@ export const featuredProjects: Project[] = [
     description: 'A vibrant rooftop pickleball destination with clear venue information and booking pathways.',
     url: 'https://skycourtrooftop.vercel.app',
     featured: true,
-    preview: '',
+    preview: '/previews/skycourt.webp',
     previewAlt: 'SkyCourt rooftop pickleball website homepage',
   },
   {
@@ -77,8 +77,18 @@ export const featuredProjects: Project[] = [
     description: 'A scent-led storefront that helps shoppers discover a signature fragrance.',
     url: 'https://queperfumery.vercel.app',
     featured: true,
-    preview: '',
+    preview: '/previews/que-perfumery.jpg',
     previewAlt: 'Que Perfumery online store homepage',
+  },
+  {
+    slug: 'casa-uno-villas',
+    name: 'Casa Uno Villas',
+    category: 'Hospitality',
+    description: 'A serene villa experience that helps guests explore three private-pool stays and book directly.',
+    url: 'https://casa-uno-villas.vercel.app',
+    featured: true,
+    preview: '/previews/casa-uno-villas.jpg',
+    previewAlt: 'Casa Uno Villas website homepage',
   },
 ]
 
@@ -95,10 +105,8 @@ export const archiveProjects: Project[] = [
   { slug: 'delta-sports', name: 'Delta Sports Arena', category: 'Sports & Wellness', description: 'Sports arena website.', url: 'https://deltasports.vercel.app', featured: false, preview: '', previewAlt: 'Delta Sports Arena project' },
   { slug: 'dink-arena', name: 'Dink Arena PH', category: 'Sports & Wellness', description: 'Pickleball venue website.', url: 'https://dinkarenaph.vercel.app', featured: false, preview: '', previewAlt: 'Dink Arena PH project' },
   { slug: 'mobilecart', name: 'MobileCart PH', category: 'Retail', description: 'Apple device storefront.', url: 'https://mobilecartph.vercel.app', featured: false, preview: '', previewAlt: 'MobileCart PH project' },
-  { slug: 'pa-tongits', name: 'Pa-Tongits ni Konsi', category: 'Experiments', description: 'Browser card-game experience.', url: 'https://patongitsnikonsi.vercel.app', featured: false, preview: '', previewAlt: 'Pa-Tongits ni Konsi project' },
   { slug: 'currency-simulator', name: 'Currency Conversion Simulator', category: 'Software & Systems', description: 'Currency conversion utility.', url: 'https://currencysite.vercel.app', featured: false, preview: '', previewAlt: 'Currency Conversion Simulator project' },
   { slug: 'suncolor', name: 'Suncolor Graphics', category: 'Business Services', description: 'Premium printing services website.', url: 'https://suncolordraft.vercel.app', featured: false, preview: '', previewAlt: 'Suncolor Graphics project' },
-  { slug: 'valentine-invitation', name: 'Valentine’s Invitation', category: 'Experiments', description: 'Interactive personal invitation.', url: 'https://openmekyky.vercel.app', featured: false, preview: '', previewAlt: 'Valentine’s Invitation project' },
   { slug: 'repmetric-360', name: 'RepMetric / 360', category: 'Software & Systems', description: 'Performance reporting interface.', url: 'https://repmetric-360.vercel.app', featured: false, preview: '', previewAlt: 'RepMetric 360 project' },
   { slug: 'reservation', name: 'Reservation', category: 'Hospitality', description: 'Simple reservation experience.', url: 'https://reservation-six-blush.vercel.app', featured: false, preview: '', previewAlt: 'Reservation project' },
 ]

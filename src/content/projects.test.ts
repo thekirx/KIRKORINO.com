@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { allProjects, archiveProjects, featuredProjects } from './projects'
 
 describe('project catalog', () => {
-  it('contains six ordered featured projects and eighteen archive projects', () => {
+  it('contains seven ordered featured projects and sixteen archive projects', () => {
     expect(featuredProjects.map(({ name }) => name)).toEqual([
       'Hakum Auto Care',
       'Kaen Manila',
@@ -10,9 +10,10 @@ describe('project catalog', () => {
       'SkyCourt',
       'Linaw Finance',
       'Que Perfumery',
+      'Casa Uno Villas',
     ])
-    expect(archiveProjects).toHaveLength(18)
-    expect(allProjects).toHaveLength(24)
+    expect(archiveProjects).toHaveLength(16)
+    expect(allProjects).toHaveLength(23)
   })
 
   it('contains only secure, unique live URLs and excludes the failed project', () => {
@@ -20,5 +21,7 @@ describe('project catalog', () => {
     expect(urls.every((url) => url.startsWith('https://'))).toBe(true)
     expect(new Set(urls).size).toBe(urls.length)
     expect(allProjects.some(({ slug }) => slug === 'mvpgetmeds')).toBe(false)
+    expect(allProjects.some(({ slug }) => slug === 'pa-tongits')).toBe(false)
+    expect(allProjects.some(({ slug }) => slug === 'valentine-invitation')).toBe(false)
   })
 })
