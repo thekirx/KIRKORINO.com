@@ -16,7 +16,7 @@ export function ProjectFeature({ project, index }: ProjectFeatureProps) {
       className={`project-story project-story-${project.slug} ${index < 4 ? 'project-story-primary' : 'project-story-continuation'}`}
       data-testid="featured-project"
     >
-      <div className="story-copy">
+      <div className="story-copy" data-reveal>
         <p className="story-kicker">{String(index + 1).padStart(2, '0')} / {project.category}</p>
         <h3>{project.featureHeadline ?? project.name}</h3>
         <p className="story-summary">{project.featureSummary ?? project.description}</p>
@@ -30,7 +30,7 @@ export function ProjectFeature({ project, index }: ProjectFeatureProps) {
           View live project <ArrowIcon />
         </a>
       </div>
-      <a className="story-media" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name} website`}>
+      <a className="story-media" data-reveal href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.name} website`}>
         {imageFailed || !project.preview ? (
           <div className={`preview-fallback preview-fallback-${(index % 6) + 1}`} role="img" aria-label={project.previewAlt}>
             <span>{project.name}</span>

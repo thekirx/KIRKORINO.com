@@ -11,7 +11,7 @@ export function Hero() {
         <p>Manila, PH</p>
       </div>
       <h1 className="hero-title"><span>Kirk</span>{' '}<span>Orino</span></h1>
-      <div className="hero-foot">
+      <div className="hero-foot" data-reveal>
         <p>I build sharp digital identities and useful websites for businesses that deserve to be noticed.</p>
         <a className="editorial-link" href="#work">Explore selected work <ArrowIcon direction="down" /></a>
       </div>

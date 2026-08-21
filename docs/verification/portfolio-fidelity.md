@@ -18,15 +18,16 @@
 | Archive | Dense black numbered list | Sixteen working projects appear in a high-contrast editorial index | Matched |
 | Contact close | Oversized electric-blue new-business section | Email and phone actions sit below the approved statement | Matched |
 | Mobile collapse | Strong type and sequence retained at narrow widths | At 700px all case studies become one column, media becomes 4:3, secondary metadata is removed, and actions remain readable; 320px minimum is supported | Implemented |
+| Motion | Editorial hierarchy should feel deliberate rather than decorative | Staggered hero entrance, one-time viewport reveals, directional link motion, and restrained image scaling preserve the grid and copy | Matched |
 | Accessibility | Keyboard-visible actions and semantic hierarchy | Landmarks, labelled external links, alt text/fallbacks, focus styles, and reduced-motion handling are present | Verified in tests |
 
 ## Automated Evidence
 
-- `npm run test:run`: 3 files, 8 tests passing.
+- `npm run test:run`: 4 files, 11 tests passing.
 - `npm run build`: production build succeeds.
 - `git diff --check`: no whitespace errors.
 - Inventory: 7 featured projects and 16 archive projects; Tongits and Valentine invitation are excluded.
 
 ## Browser Evidence
 
-The local Vite site is verified at `http://127.0.0.1:5173/` for section order, live project imagery, project-index navigation, contact targets, external-link safety, and an error-free console. The responsive CSS contains explicit 900px, 700px, and 360px adaptations, with the layout remaining supported down to the required 320px minimum width.
+The local Vite site is verified at `http://127.0.0.1:5173/` at 1280px desktop and 390px mobile widths. The browser confirmed 45 reveal targets, an active hero entrance animation, progressive reveal after navigating to `#work`, no framework overlay, no console warnings or errors, and no horizontal overflow. Every featured brand heading remained within its mobile container. The responsive CSS contains explicit 900px, 700px, and 360px adaptations, with the layout supported down to the required 320px minimum width.

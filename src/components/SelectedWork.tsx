@@ -6,7 +6,7 @@ export function SelectedWork() {
   return (
     <section className="selected-work" id="work" aria-labelledby="selected-work-title">
       <div className="work-index">
-        <div className="index-title">
+        <div className="index-title" data-reveal>
           <h2 id="selected-work-title">Selected work</h2>
           <span aria-label="Seven featured projects">07</span>
         </div>
