@@ -12,8 +12,11 @@ export function SelectedWork() {
         </div>
         <ProjectIndex />
       </div>
-      <div className="project-stories">
-        {featuredProjects.map((project, index) => <ProjectFeature key={project.slug} project={project} index={index} />)}
+      <div className="primary-stories">
+        {featuredProjects.slice(0, 4).map((project, index) => <ProjectFeature key={project.slug} project={project} index={index} />)}
+      </div>
+      <div className="project-continuation">
+        {featuredProjects.slice(4).map((project, index) => <ProjectFeature key={project.slug} project={project} index={index + 4} />)}
       </div>
     </section>
   )

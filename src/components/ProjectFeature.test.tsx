@@ -3,20 +3,31 @@ import { describe, expect, it } from 'vitest'
 import type { Project } from '../content/projects'
 import { ProjectFeature } from './ProjectFeature'
 
-const projectWithoutPreview: Project = {
+const project: Project = {
   slug: 'sample',
   name: 'Sample Project',
   category: 'Business Services',
   description: 'A sample project.',
+  featureHeadline: 'Designed with intent.',
+  featureSummary: 'A focused editorial presentation.',
   url: 'https://example.com',
   featured: true,
-  preview: '',
+  preview: '/previews/sample.jpg',
   previewAlt: 'Sample Project preview',
 }
 
 describe('ProjectFeature', () => {
+  it('renders a linkable editorial project story', () => {
+    render(<ProjectFeature project={project} index={0} />)
+
+    expect(screen.getByRole('article')).toHaveAttribute('id', 'project-sample')
+    expect(screen.getByRole('heading', { name: 'Designed with intent.' })).toBeInTheDocument()
+    expect(screen.getByText('A focused editorial presentation.')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'View Sample Project live' })).toHaveAttribute('href', 'https://example.com')
+  })
+
   it('shows branded project art when no captured preview is available', () => {
-    render(<ProjectFeature project={projectWithoutPreview} index={0} />)
+    render(<ProjectFeature project={{ ...project, preview: '' }} index={0} />)
 
     expect(screen.getByRole('img', { name: 'Sample Project preview' })).toHaveTextContent('Sample Project')
   })
