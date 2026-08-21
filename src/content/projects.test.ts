@@ -24,4 +24,8 @@ describe('project catalog', () => {
     expect(allProjects.some(({ slug }) => slug === 'pa-tongits')).toBe(false)
     expect(allProjects.some(({ slug }) => slug === 'valentine-invitation')).toBe(false)
   })
+
+  it('gives every featured project a real preview image', () => {
+    expect(featuredProjects.every(({ preview }) => preview.startsWith('/previews/'))).toBe(true)
+  })
 })

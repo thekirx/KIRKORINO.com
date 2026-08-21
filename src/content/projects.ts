@@ -47,7 +47,7 @@ export const featuredProjects: Project[] = [
     description: 'A reassuring dental experience that turns treatment discovery into simple appointment booking.',
     url: 'https://optrizodentistry.vercel.app',
     featured: true,
-    preview: '',
+    preview: '/previews/optrizo-dentistry.jpg',
     previewAlt: 'Optrizo Dentistry website homepage',
   },
   {
@@ -67,7 +67,7 @@ export const featuredProjects: Project[] = [
     description: 'A friendly financial dashboard that turns daily business numbers into a clear picture.',
     url: 'https://linawfinance.vercel.app',
     featured: true,
-    preview: '',
+    preview: '/previews/linaw-finance.jpg',
     previewAlt: 'Linaw Finance product homepage',
   },
   {
