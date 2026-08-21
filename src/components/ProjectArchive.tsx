@@ -12,30 +12,25 @@ const categoryOrder: ProjectCategory[] = [
 ]
 
 export function ProjectArchive() {
+  const orderedProjects = categoryOrder.flatMap((category) =>
+    archiveProjects.filter((project) => project.category === category),
+  )
+
   return (
     <section className="project-archive" aria-labelledby="archive-title">
       <div className="archive-intro">
-        <h2 id="archive-title">More things I’ve made.</h2>
-        <p>A growing collection of websites, tools, stores, and experiments built for different kinds of people and businesses.</p>
+        <p className="meta-text">Full archive / 16</p>
+        <h2 id="archive-title">The wider body of work.</h2>
       </div>
-      <div className="archive-groups">
-        {categoryOrder.map((category) => {
-          const projects = archiveProjects.filter((project) => project.category === category)
-          if (!projects.length) return null
-          return (
-            <section className="archive-group" key={category} aria-labelledby={`archive-${category}`}>
-              <h3 id={`archive-${category}`}>{category}</h3>
-              <div className="archive-list">
-                {projects.map((project) => (
-                  <a data-testid="archive-project" key={project.slug} href={project.url} target="_blank" rel="noopener noreferrer">
-                    <span>{project.name}</span>
-                    <ArrowIcon />
-                  </a>
-                ))}
-              </div>
-            </section>
-          )
-        })}
+      <div className="archive-list">
+        {orderedProjects.map((project, index) => (
+          <a data-testid="archive-project" key={project.slug} href={project.url} target="_blank" rel="noopener noreferrer">
+            <span className="archive-number">{String(index + 1).padStart(2, '0')}</span>
+            <span className="archive-name">{project.name}</span>
+            <span className="archive-category">{project.category}</span>
+            <ArrowIcon />
+          </a>
+        ))}
       </div>
     </section>
   )

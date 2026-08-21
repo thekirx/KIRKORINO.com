@@ -34,6 +34,8 @@
 - Create: `src/components/ProjectIndex.tsx`
 - Modify: `src/components/ContactCTA.tsx`
 - Modify: `src/components/Footer.tsx`
+- Modify: `src/components/ProjectArchive.tsx`
+- Modify: `src/App.tsx`
 
 **Interfaces:**
 - Consumes: existing `Project`, `featuredProjects`, contact URLs, and anchor IDs.
@@ -104,7 +106,7 @@ export function ProjectIndex() {
 }
 ```
 
-Update the existing structural components to match the approved mock copy and order: `KO®` header, `Kirk / Orino` hero, black positioning statement, selected-work index, contact headline, and minimal footer. Keep the existing mail and phone URLs unchanged.
+Update the existing structural components to match the approved mock copy and order: `KO®` header, `Kirk / Orino` hero, black positioning statement, selected-work index, numbered archive, contact headline, and minimal footer. Reorder `App.tsx` to Hero → About → Selected Work → Archive → Contact. Keep the existing mail and phone URLs unchanged.
 
 - [ ] **Step 4: Run focused tests and verify GREEN**
 
@@ -115,7 +117,7 @@ Expected: all focused tests PASS.
 - [ ] **Step 5: Commit the editorial structure**
 
 ```bash
-git add -- src/content/projects.ts src/content/projects.test.ts src/App.test.tsx src/components/Header.tsx src/components/Hero.tsx src/components/About.tsx src/components/SelectedWork.tsx src/components/ProjectIndex.tsx src/components/ContactCTA.tsx src/components/Footer.tsx
+git add -- src/content/projects.ts src/content/projects.test.ts src/App.test.tsx src/App.tsx src/components/Header.tsx src/components/Hero.tsx src/components/About.tsx src/components/SelectedWork.tsx src/components/ProjectIndex.tsx src/components/ProjectArchive.tsx src/components/ContactCTA.tsx src/components/Footer.tsx
 git commit -m "feat: add editorial portfolio structure"
 ```
 

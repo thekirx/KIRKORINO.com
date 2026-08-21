@@ -5,12 +5,12 @@ describe('project catalog', () => {
   it('contains seven ordered featured projects and sixteen archive projects', () => {
     expect(featuredProjects.map(({ name }) => name)).toEqual([
       'Hakum Auto Care',
-      'Kaen Manila',
-      'Optrizo Dentistry',
-      'SkyCourt',
-      'Linaw Finance',
-      'Que Perfumery',
       'Casa Uno Villas',
+      'Optrizo Dentistry',
+      'Linaw Finance',
+      'Kaen Manila',
+      'SkyCourt',
+      'Que Perfumery',
     ])
     expect(archiveProjects).toHaveLength(16)
     expect(allProjects).toHaveLength(23)
@@ -27,5 +27,11 @@ describe('project catalog', () => {
 
   it('gives every featured project a real preview image', () => {
     expect(featuredProjects.every(({ preview }) => preview.startsWith('/previews/'))).toBe(true)
+  })
+
+  it('provides an editorial headline and summary for every featured project', () => {
+    expect(featuredProjects.every(({ featureHeadline, featureSummary }) =>
+      Boolean(featureHeadline?.trim() && featureSummary?.trim()),
+    )).toBe(true)
   })
 })

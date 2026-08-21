@@ -1,13 +1,18 @@
+import { ArrowIcon } from './ArrowIcon'
+
 const inquiryHref = 'mailto:kirkorino@gmail.com?subject=Project%20inquiry%20for%20Kirk%20Orino'
 
 export function Header() {
   return (
     <header className="site-header">
-      <a className="wordmark" href="#top" aria-label="Kirk Orino, back to top">Kirk Orino</a>
+      <a className="wordmark" href="#top" aria-label="Kirk Orino, back to top">KO<sup>®</sup></a>
       <nav aria-label="Primary navigation">
-        <a className="nav-secondary" href="#work">Work</a>
-        <a className="nav-secondary" href="#about">About</a>
-        <a className="button button-small" href={inquiryHref}>Start a project</a>
+        <div className="nav-links">
+          <a href="#work">Work</a>
+          <a href="#about">Profile</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a className="availability-link" href={inquiryHref}>Available for projects <ArrowIcon /></a>
       </nav>
     </header>
   )

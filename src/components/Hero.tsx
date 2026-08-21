@@ -5,17 +5,18 @@ const capabilities = ['Brand websites', 'E-commerce', 'Booking systems', 'Busine
 export function Hero() {
   return (
     <section className="hero" id="top">
-      <div className="hero-inner">
-        <h1>Websites that make businesses impossible to overlook.</h1>
-        <div className="hero-support">
-          <p>I design and build distinctive websites and useful digital products for ambitious businesses.</p>
-          <a className="text-link" href="#work">View selected work <ArrowIcon direction="down" /></a>
-        </div>
+      <div className="hero-meta meta-text">
+        <p>Web designer + developer</p>
+        <p>Selected work / 2026</p>
+        <p>Manila, PH</p>
       </div>
-      <div className="capabilities" aria-label="Services">
-        <div className="capabilities-track">
-          {capabilities.map((capability) => <span key={capability}>{capability}</span>)}
-        </div>
+      <h1 className="hero-title"><span>Kirk</span>{' '}<span>Orino</span></h1>
+      <div className="hero-foot">
+        <p>I build sharp digital identities and useful websites for businesses that deserve to be noticed.</p>
+        <a className="editorial-link" href="#work">Explore selected work <ArrowIcon direction="down" /></a>
+      </div>
+      <div className="hero-services" aria-label="Services">
+        {capabilities.map((capability) => <span key={capability}>{capability}</span>)}
       </div>
     </section>
   )
