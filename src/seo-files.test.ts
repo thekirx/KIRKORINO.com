@@ -17,14 +17,17 @@ describe('static SEO files', () => {
     expect.soft(document.querySelector('meta[property="og:title"]')?.getAttribute('content')).toBe(title)
     expect.soft(document.querySelector('meta[property="og:description"]')?.getAttribute('content')).toBe(description)
     expect.soft(document.querySelector('meta[property="og:url"]')?.getAttribute('content')).toBe('https://kirkorino.com/')
-    expect.soft(document.querySelector('meta[property="og:image"]')?.getAttribute('content')).toMatch(
-      /^https:\/\/kirkorino\.com\//,
+    expect.soft(document.querySelector('meta[property="og:image"]')?.getAttribute('content')).toBe(
+      'https://kirkorino.com/og-image.png',
     )
+    expect.soft(document.querySelector('meta[property="og:image:type"]')?.getAttribute('content')).toBe('image/png')
+    expect.soft(document.querySelector('meta[property="og:image:width"]')?.getAttribute('content')).toBe('1729')
+    expect.soft(document.querySelector('meta[property="og:image:height"]')?.getAttribute('content')).toBe('910')
     expect.soft(document.querySelector('meta[name="twitter:card"]')?.getAttribute('content')).toBe('summary_large_image')
     expect.soft(document.querySelector('meta[name="twitter:title"]')?.getAttribute('content')).toBe(title)
     expect.soft(document.querySelector('meta[name="twitter:description"]')?.getAttribute('content')).toBe(description)
-    expect.soft(document.querySelector('meta[name="twitter:image"]')?.getAttribute('content')).toMatch(
-      /^https:\/\/kirkorino\.com\//,
+    expect.soft(document.querySelector('meta[name="twitter:image"]')?.getAttribute('content')).toBe(
+      'https://kirkorino.com/og-image.png',
     )
   })
 
