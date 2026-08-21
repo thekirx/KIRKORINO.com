@@ -1,30 +1,32 @@
-# Portfolio Fidelity Ledger
+# Editorial Portfolio Fidelity Ledger
 
 ## Reference
 
-- Approved direction: Curated Studio / Ink + Electric Blue.
-- Approved visual companion: `.superpowers/brainstorm/3481-1787258980/content/homepage-structure.html`.
-- Native concept dimensions: browser-responsive HTML concept; no fixed raster dimensions.
+- Approved direction: editorial, art-directed portfolio inspired by the supplied Behance reference without copying it.
+- Approved local concept: `.superpowers/brainstorm/29906-1787304095/content/editorial-portfolio-direction.html`.
+- Visual system: strict black/white grid, electric blue, oversized grotesk type, varied case-study compositions, no glass, gradients, or generic cards.
 
 ## Comparison
 
-| Area | Concept evidence | Implementation evidence | Status |
+| Area | Approved concept | Implementation | Status |
 | --- | --- | --- | --- |
-| Above-the-fold copy | `KIRK ORINO`, Work, About, Start a project, approved headline, supporting statement, View selected work | Component tests assert the approved H1 and contact action; `Header` and `Hero` preserve the labels and order | Matched in code |
-| Layout | Spacious hero, capabilities band, alternating selected work, dark archive, centered contact close | `styles.css` implements the same open container model and section order | Matched in code and local browser preview |
-| Typography | Tight large sans-serif display type with restrained supporting copy | Fluid display sizes, tight tracking, dedicated control typography, and readable body line heights | Matched in code and local browser preview |
-| Palette | Near-white, ink black, electric blue, muted gray, near-black archive | Exact approved tokens `#f7f6f2`, `#0a0c10`, `#1548ff`, `#565961`, and `#0d0f13` | Matched |
-| Project treatment | Seven large project media frames with varied project-specific color | Seven consistent 3:2 frames using authentic live-site imagery, including fresh screenshots for Optrizo and Linaw | Matched |
-| Responsive behavior | Editorial desktop composition continuing cleanly on mobile | Explicit 900px and 640px layouts; featured rows stack, secondary mobile nav hides, email action remains | Implemented in code; desktop browser preview verified |
-| Accessibility | Clear navigation and usable controls | Semantic landmarks, focus-visible styles, 44px-class actions, external-link security, alt-labelled fallbacks, reduced-motion rules | Automated DOM tests and local browser navigation pass |
-| Links and contact | Live work opens externally; email and phone are direct | Catalog contains 23 unique HTTPS URLs; tests verify email and phone targets and external-link attributes | Matched |
+| Hero | Small three-part metadata row, oversized two-line name, blue `ORINO`, concise positioning | Same hierarchy, fluid display scale, desktop indent and compact mobile lockup | Matched |
+| Positioning band | Full-black statement section with restrained supporting copy | `Not just another website.` band uses the same contrast, scale, and two-column rhythm | Matched |
+| Project index | Seven numbered rows with project, discipline, and directional cue | Seven anchor rows link directly to each featured case study | Matched |
+| Primary stories | Four distinct, art-directed cases rather than repeated cards | Hakum, Casa Uno, Optrizo, and Linaw each have a unique palette, scale, and image treatment | Matched |
+| Continuation | Three more compact cases with varied composition | Kaen and SkyCourt form a two-up spread; Que expands across the full grid | Matched |
+| Archive | Dense black numbered list | Sixteen working projects appear in a high-contrast editorial index | Matched |
+| Contact close | Oversized electric-blue new-business section | Email and phone actions sit below the approved statement | Matched |
+| Mobile collapse | Strong type and sequence retained at narrow widths | At 700px all case studies become one column, media becomes 4:3, secondary metadata is removed, and actions remain readable; 320px minimum is supported | Implemented |
+| Accessibility | Keyboard-visible actions and semantic hierarchy | Landmarks, labelled external links, alt text/fallbacks, focus styles, and reduced-motion handling are present | Verified in tests |
 
 ## Automated Evidence
 
-- `npm run test:run`: 3 files, 5 tests passing.
+- `npm run test:run`: 3 files, 8 tests passing.
 - `npm run build`: production build succeeds.
-- Project inventory: 23 working projects included; failed `mvpgetmeds`, Pa-Tongits ni Konsi, and Valentine’s Invitation excluded.
+- `git diff --check`: no whitespace errors.
+- Inventory: 7 featured projects and 16 archive projects; Tongits and Valentine invitation are excluded.
 
-## Browser Verification
+## Browser Evidence
 
-The local Vite preview was opened in the Codex in-app browser at `http://127.0.0.1:5173/`. A desktop screenshot and DOM snapshot confirmed the approved section order, seven featured entries, all seven live-site image elements, both Casa Uno links, and no Tongits or Valentine entry. The `View selected work` interaction correctly navigated to `#work`.
+The local Vite site is verified at `http://127.0.0.1:5173/` for section order, live project imagery, project-index navigation, contact targets, external-link safety, and an error-free console. The responsive CSS contains explicit 900px, 700px, and 360px adaptations, with the layout remaining supported down to the required 320px minimum width.
