@@ -14,6 +14,8 @@ const project: Project = {
   featured: true,
   preview: '/previews/sample.jpg',
   previewAlt: 'Sample Project preview',
+  previewWidth: 1200,
+  previewHeight: 630,
 }
 
 describe('ProjectFeature', () => {
@@ -24,6 +26,11 @@ describe('ProjectFeature', () => {
     expect(screen.getByRole('heading', { name: 'Designed with intent.' })).toBeInTheDocument()
     expect(screen.getByText('A focused editorial presentation.')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'View Sample Project live' })).toHaveAttribute('href', 'https://example.com')
+    const image = screen.getByRole('img', { name: 'Sample Project preview' })
+    expect(image).toHaveAttribute('width', '1200')
+    expect(image).toHaveAttribute('height', '630')
+    expect(image).toHaveAttribute('loading', 'lazy')
+    expect(image).toHaveAttribute('decoding', 'async')
   })
 
   it('shows branded project art when no captured preview is available', () => {

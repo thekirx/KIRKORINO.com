@@ -17,6 +17,8 @@ export interface Project {
   featured: boolean
   preview: string
   previewAlt: string
+  previewWidth?: number
+  previewHeight?: number
   featureHeadline?: string
   featureSummary?: string
 }
@@ -33,6 +35,8 @@ export const featuredProjects: Project[] = [
     featured: true,
     preview: '/previews/hakum-auto-care.webp',
     previewAlt: 'Hakum Auto Care website homepage',
+    previewWidth: 1876,
+    previewHeight: 1111,
   },
   {
     slug: 'casa-uno-villas',
@@ -45,6 +49,8 @@ export const featuredProjects: Project[] = [
     featured: true,
     preview: '/previews/casa-uno-villas.jpg',
     previewAlt: 'Casa Uno Villas website homepage',
+    previewWidth: 1275,
+    previewHeight: 1700,
   },
   {
     slug: 'optrizo-dentistry',
@@ -57,6 +63,8 @@ export const featuredProjects: Project[] = [
     featured: true,
     preview: '/previews/optrizo-dentistry.jpg',
     previewAlt: 'Optrizo Dentistry website homepage',
+    previewWidth: 1265,
+    previewHeight: 712,
   },
   {
     slug: 'linaw-finance',
@@ -69,6 +77,8 @@ export const featuredProjects: Project[] = [
     featured: true,
     preview: '/previews/linaw-finance.jpg',
     previewAlt: 'Linaw Finance product homepage',
+    previewWidth: 1265,
+    previewHeight: 712,
   },
   {
     slug: 'kaen-manila',
@@ -81,6 +91,8 @@ export const featuredProjects: Project[] = [
     featured: true,
     preview: '/previews/kaen-manila.avif',
     previewAlt: 'Kaen Manila website homepage',
+    previewWidth: 1200,
+    previewHeight: 1446,
   },
   {
     slug: 'skycourt',
@@ -93,6 +105,8 @@ export const featuredProjects: Project[] = [
     featured: true,
     preview: '/previews/skycourt.webp',
     previewAlt: 'SkyCourt rooftop pickleball website homepage',
+    previewWidth: 2048,
+    previewHeight: 1536,
   },
   {
     slug: 'que-perfumery',
@@ -105,6 +119,8 @@ export const featuredProjects: Project[] = [
     featured: true,
     preview: '/previews/que-perfumery.jpg',
     previewAlt: 'Que Perfumery online store homepage',
+    previewWidth: 1800,
+    previewHeight: 1013,
   },
 ]
 

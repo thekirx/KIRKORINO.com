@@ -29,6 +29,12 @@ describe('project catalog', () => {
     expect(featuredProjects.every(({ preview }) => preview.startsWith('/previews/'))).toBe(true)
   })
 
+  it('gives every featured preview its intrinsic dimensions', () => {
+    expect(featuredProjects.every(({ previewWidth, previewHeight }) =>
+      Number.isInteger(previewWidth) && Number.isInteger(previewHeight) && previewWidth! > 0 && previewHeight! > 0,
+    )).toBe(true)
+  })
+
   it('provides an editorial headline and summary for every featured project', () => {
     expect(featuredProjects.every(({ featureHeadline, featureSummary }) =>
       Boolean(featureHeadline?.trim() && featureSummary?.trim()),

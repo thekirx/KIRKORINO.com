@@ -40,7 +40,10 @@ export function ProjectFeature({ project, index }: ProjectFeatureProps) {
             className={`project-image project-image-${project.slug}`}
             src={project.preview}
             alt={project.previewAlt}
-            loading={index === 0 ? 'eager' : 'lazy'}
+            width={project.previewWidth}
+            height={project.previewHeight}
+            loading="lazy"
+            decoding="async"
             onError={() => setImageFailed(true)}
           />
         )}
