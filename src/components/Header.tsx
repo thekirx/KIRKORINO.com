@@ -9,7 +9,8 @@ export function Header() {
       <nav aria-label="Primary navigation">
         <div className="nav-links">
           <a href="#work">Work</a>
-          <a href="#about">Profile</a>
+          <a href="#profile">Profile</a>
+          <a href="#process">Process</a>
           <a href="#contact">Contact</a>
         </div>
         <a className="availability-link" href={inquiryHref}>Available for projects <ArrowIcon /></a>
