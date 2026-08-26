@@ -31,6 +31,15 @@ describe('static SEO files', () => {
     )
   })
 
+  it('declares its own icon set so no stale origin favicon is used', () => {
+    const document = new DOMParser().parseFromString(indexHtml, 'text/html')
+
+    expect.soft(document.querySelector('link[rel="icon"][sizes="any"]')?.getAttribute('href')).toBe('/favicon.ico')
+    expect.soft(document.querySelector('link[rel="icon"][sizes="32x32"]')?.getAttribute('href')).toBe('/favicon-32.png')
+    expect.soft(document.querySelector('link[rel="apple-touch-icon"]')?.getAttribute('href')).toBe('/apple-touch-icon.png')
+    expect.soft(document.querySelector('meta[name="theme-color"]')?.getAttribute('content')).toBe('#f4f2ed')
+  })
+
   it('publishes valid Person structured data without invented profiles', () => {
     const document = new DOMParser().parseFromString(indexHtml, 'text/html')
     const script = document.querySelector('script[type="application/ld+json"]')
