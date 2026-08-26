@@ -1,5 +1,6 @@
 import { archiveProjects, type ProjectCategory } from '../content/projects'
 import { ArrowIcon } from './ArrowIcon'
+import { SplitHeading } from './SplitHeading'
 
 const categoryOrder: ProjectCategory[] = [
   'Hospitality',
@@ -7,20 +8,24 @@ const categoryOrder: ProjectCategory[] = [
   'Software & Systems',
   'Retail',
   'Automotive',
+  'Healthcare',
   'Business Services',
   'Experiments',
 ]
 
 export function ProjectArchive() {
-  const orderedProjects = categoryOrder.flatMap((category) =>
-    archiveProjects.filter((project) => project.category === category),
-  )
+  // Anything whose category is missing from the running order still has to be
+  // listed, or a catalogue entry disappears from the page without a trace.
+  const orderedProjects = [
+    ...categoryOrder.flatMap((category) => archiveProjects.filter((project) => project.category === category)),
+    ...archiveProjects.filter((project) => !categoryOrder.includes(project.category)),
+  ]
 
   return (
     <section className="project-archive" aria-labelledby="archive-title">
       <div className="archive-intro" data-reveal>
-        <p className="meta-text">Full archive / 16</p>
-        <h2 id="archive-title">The wider body of work.</h2>
+        <p className="meta-text">Full archive / {archiveProjects.length}</p>
+        <SplitHeading id="archive-title">The wider body of work.</SplitHeading>
       </div>
       <div className="archive-list">
         {orderedProjects.map((project, index) => (

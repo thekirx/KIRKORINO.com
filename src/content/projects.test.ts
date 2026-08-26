@@ -2,18 +2,31 @@ import { describe, expect, it } from 'vitest'
 import { allProjects, archiveProjects, featuredProjects } from './projects'
 
 describe('project catalog', () => {
-  it('contains seven ordered featured projects and sixteen archive projects', () => {
+  it('contains ten ordered featured projects and eighteen archive projects', () => {
     expect(featuredProjects.map(({ name }) => name)).toEqual([
       'Hakum Auto Care',
       'Casa Uno Villas',
-      'Optrizo Dentistry',
-      'Linaw Finance',
+      'Buff Coffee Club',
+      'Tela Park',
+      'Cafe 10/23',
+      'El Poco Cantina',
+      'Oasis Pickleball Courts',
       'Kaen Manila',
       'SkyCourt',
       'Que Perfumery',
     ])
-    expect(archiveProjects).toHaveLength(16)
-    expect(allProjects).toHaveLength(23)
+    expect(archiveProjects).toHaveLength(18)
+    expect(allProjects).toHaveLength(28)
+  })
+
+  it('lists the newest Vercel deployments ahead of the older archive entries', () => {
+    expect(archiveProjects.slice(0, 2).map(({ name }) => name)).toEqual(['Everyhype Store', 'Carport Wheels'])
+  })
+
+  it('keeps a project in exactly one of the two lists', () => {
+    const featuredSlugs = new Set(featuredProjects.map(({ slug }) => slug))
+    expect(archiveProjects.some(({ slug }) => featuredSlugs.has(slug))).toBe(false)
+    expect(new Set(allProjects.map(({ slug }) => slug)).size).toBe(allProjects.length)
   })
 
   it('contains only secure, unique live URLs and excludes the failed project', () => {
