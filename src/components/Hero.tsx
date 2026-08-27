@@ -1,7 +1,6 @@
+import { capabilities } from '../content/practice'
 import { ArrowIcon } from './ArrowIcon'
 import { FluidHeroTitle } from './FluidHeroTitle'
-
-const capabilities = ['Brand websites', 'E-commerce', 'Booking systems', 'Business software', 'Responsive development']
 
 export function Hero() {
   return (
@@ -17,7 +16,17 @@ export function Hero() {
         <a className="editorial-link" href="#work">Explore selected work <ArrowIcon direction="down" /></a>
       </div>
       <div className="hero-services" aria-label="Services">
-        {capabilities.map((capability) => <span key={capability}>{capability}</span>)}
+        <div className="hero-services-track">
+          {Array.from({ length: 6 }, (_, pass) => (
+            <div className="hero-services-run" aria-hidden={pass > 0} key={pass}>
+              {capabilities.map((capability) => (
+                pass === 0
+                  ? <span key={capability}>{capability}</span>
+                  : <span data-label={capability} key={capability} />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

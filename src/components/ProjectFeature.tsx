@@ -38,6 +38,7 @@ export function ProjectFeature({ project, index }: ProjectFeatureProps) {
         ) : (
           <img
             className={`project-image project-image-${project.slug}`}
+            data-parallax=""
             src={project.preview}
             alt={project.previewAlt}
             width={project.previewWidth}

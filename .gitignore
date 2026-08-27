@@ -5,3 +5,7 @@ dist/
 *.tsbuildinfo
 vite.config.js
 vite.config.d.ts
+
+# Local mirror of the ChatGPT project — regenerated, not source of truth
+AGENTS.md
+sources/

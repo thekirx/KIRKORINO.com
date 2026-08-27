@@ -1,14 +1,25 @@
 import { useRef, type PointerEvent as ReactPointerEvent } from 'react'
+import { featuredProjects } from '../content/projects'
+import { HeroWordArt } from './HeroWordArt'
 
-const shiftLimit = 24
+const heroArt = featuredProjects.map(({ preview }) => preview).filter(Boolean)
 
-function clampShift(value: number) {
-  return Math.round(Math.max(-shiftLimit, Math.min(shiftLimit, value)))
+/** How far a deliberate drag may throw the words. */
+const dragLimit = 24
+/** How far the words drift from hovering alone — small enough to read as craft. */
+const parallaxLimit = 10
+
+function prefersReducedMotion() {
+  return Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)
 }
 
-function setTitleShift(title: HTMLHeadingElement, x: number, y: number) {
-  const kirkX = clampShift(x)
-  const kirkY = clampShift(y)
+function clamp(value: number, limit: number) {
+  return Math.round(Math.max(-limit, Math.min(limit, value)))
+}
+
+function setTitleShift(title: HTMLHeadingElement, x: number, y: number, limit: number) {
+  const kirkX = clamp(x, limit)
+  const kirkY = clamp(y, limit)
 
   title.style.setProperty('--kirk-shift-x', `${kirkX}px`)
   title.style.setProperty('--kirk-shift-y', `${kirkY}px`)
@@ -21,40 +32,69 @@ export function FluidHeroTitle() {
   const dragRef = useRef<{ pointerId: number; startX: number; startY: number } | null>(null)
 
   const startDrag = (event: ReactPointerEvent<HTMLHeadingElement>) => {
-    if (event.pointerType === 'mouse' || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return
+    if (prefersReducedMotion()) return
 
     dragRef.current = { pointerId: event.pointerId, startX: event.clientX, startY: event.clientY }
     event.currentTarget.setPointerCapture?.(event.pointerId)
-    event.currentTarget.classList.add('is-dragging')
+    event.currentTarget.dataset.dragging = 'true'
+    delete event.currentTarget.dataset.tracking
   }
 
   const moveTitle = (event: ReactPointerEvent<HTMLHeadingElement>) => {
-    const drag = dragRef.current
     const title = titleRef.current
-    if (!drag || !title || drag.pointerId !== event.pointerId) return
+    if (!title || prefersReducedMotion()) return
 
-    setTitleShift(title, event.clientX - drag.startX, event.clientY - drag.startY)
+    const drag = dragRef.current
+    if (drag) {
+      if (drag.pointerId !== event.pointerId) return
+      setTitleShift(title, event.clientX - drag.startX, event.clientY - drag.startY, dragLimit)
+      return
+    }
+
+    // Hover parallax is for pointing devices; touch users get the drag instead.
+    if (event.pointerType !== 'mouse') return
+
+    const rect = title.getBoundingClientRect()
+    if (rect.width === 0 || rect.height === 0) return
+
+    const fromCentreX = (event.clientX - (rect.left + rect.width / 2)) / (rect.width / 2)
+    const fromCentreY = (event.clientY - (rect.top + rect.height / 2)) / (rect.height / 2)
+
+    title.dataset.tracking = 'true'
+    setTitleShift(title, fromCentreX * parallaxLimit, fromCentreY * parallaxLimit, parallaxLimit)
   }
 
-  const resetTitle = () => {
+  const releaseDrag = () => {
     const title = titleRef.current
     if (!title || !dragRef.current) return
 
     dragRef.current = null
-    setTitleShift(title, 0, 0)
-    title.classList.remove('is-dragging')
+    setTitleShift(title, 0, 0, dragLimit)
+    delete title.dataset.dragging
+  }
+
+  const restTitle = () => {
+    const title = titleRef.current
+    if (!title) return
+
+    dragRef.current = null
+    setTitleShift(title, 0, 0, dragLimit)
+    delete title.dataset.dragging
+    delete title.dataset.tracking
   }
 
   return (
     <h1
       ref={titleRef}
+      aria-label="Kirk Orino"
       className="hero-title"
+      onPointerCancel={restTitle}
       onPointerDown={startDrag}
+      onPointerLeave={restTitle}
       onPointerMove={moveTitle}
-      onPointerUp={resetTitle}
-      onPointerCancel={resetTitle}
+      onPointerUp={releaseDrag}
     >
-      <span className="hero-word hero-word-kirk"><span className="hero-word-text">Kirk</span></span>{' '}
+      <span className="hero-word hero-word-kirk"><span className="hero-word-text"><HeroWordArt sources={heroArt} word="Kirk" /></span></span>{' '}
       <span className="hero-word hero-word-orino"><span className="hero-word-text">Orino</span></span>
     </h1>
   )
