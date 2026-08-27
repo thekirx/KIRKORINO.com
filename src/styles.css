@@ -97,6 +97,7 @@ h1, h2, h3 { text-wrap: balance; }
   color: transparent;
   -webkit-text-fill-color: transparent;
 }
+.hero-art-layer::before { content: attr(data-word); }
 .hero-art-layer.is-active { opacity: 1; }
 
 /* Without text clipping the layers would paint solid photo blocks over the

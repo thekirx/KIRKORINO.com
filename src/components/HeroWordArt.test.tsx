@@ -23,6 +23,8 @@ describe('HeroWordArt', () => {
 
     for (const layer of container.querySelectorAll('.hero-art-layer')) {
       expect(layer).toHaveAttribute('aria-hidden', 'true')
+      expect(layer).toHaveAttribute('data-word', 'Kirk')
+      expect(layer).toBeEmptyDOMElement()
     }
     // the word is announced exactly once
     expect(screen.getAllByText('Kirk', { ignore: '[aria-hidden="true"]' })).toHaveLength(1)

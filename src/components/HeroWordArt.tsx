@@ -59,11 +59,10 @@ export function HeroWordArt({ word, sources }: HeroWordArtProps) {
         <span
           aria-hidden="true"
           className={`hero-art-layer${isActive ? ' is-active' : ''}`}
+          data-word={word}
           key={slot}
           style={{ backgroundImage: `${VEIL}, url("${source}")` }}
-        >
-          {word}
-        </span>
+        />
       ))}
     </span>
   )
