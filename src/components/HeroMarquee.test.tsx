@@ -18,7 +18,12 @@ describe('Hero capability marquee', () => {
     const runs = [...container.querySelectorAll('.hero-services-run')]
     expect(runs.filter((run) => run.getAttribute('aria-hidden') !== 'true')).toHaveLength(1)
     for (const capability of capabilities) {
-      expect(screen.getAllByText(capability).length).toBe(runs.length)
+      expect(screen.getAllByText(capability)).toHaveLength(1)
+      const cloneLabels = container.querySelectorAll(
+        `.hero-services-run[aria-hidden="true"] span[data-label="${capability}"]`,
+      )
+      expect(cloneLabels).toHaveLength(runs.length - 1)
+      expect([...cloneLabels].every((label) => label.textContent === '')).toBe(true)
     }
   })
 })

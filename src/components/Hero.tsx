@@ -19,7 +19,11 @@ export function Hero() {
         <div className="hero-services-track">
           {Array.from({ length: 6 }, (_, pass) => (
             <div className="hero-services-run" aria-hidden={pass > 0} key={pass}>
-              {capabilities.map((capability) => <span key={capability}>{capability}</span>)}
+              {capabilities.map((capability) => (
+                pass === 0
+                  ? <span key={capability}>{capability}</span>
+                  : <span data-label={capability} key={capability} />
+              ))}
             </div>
           ))}
         </div>
