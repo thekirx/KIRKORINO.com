@@ -242,6 +242,7 @@ h1, h2, h3 { text-wrap: balance; }
 .footer-column a { transition: opacity 160ms; }
 .footer-column a:hover { opacity: .6; }
 .footer-wordmark { display: grid; grid-template-columns: 1fr; margin: 0; font-size: clamp(4.5rem, 18.5vw, 18rem); font-weight: 900; line-height: .74; letter-spacing: -.085em; text-transform: uppercase; }
+.footer-wordmark span::before { content: attr(data-label); }
 .footer-wordmark span:last-child { justify-self: end; }
 .footer-bar { display: grid; grid-template-columns: repeat(3, 1fr); padding: 1.25rem 0; border-top: 1px solid rgb(255 255 255 / 40%); font-family: var(--mono); font-size: .67rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
 .footer-bar span:nth-child(2) { text-align: center; }

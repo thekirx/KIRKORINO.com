@@ -38,7 +38,7 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <p className="footer-wordmark" aria-hidden="true"><span>Kirk</span><span>Orino</span></p>
+      <p className="footer-wordmark" aria-hidden="true"><span data-label="Kirk" /><span data-label="Orino" /></p>
       <div className="footer-bar">
         <span>© 2026 Kirk Orino</span>
         <span>Designed and built in Manila</span>
