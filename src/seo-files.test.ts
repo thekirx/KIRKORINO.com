@@ -43,13 +43,19 @@ describe('static SEO files', () => {
 
   it('publishes a connected identity graph using only verified profiles', () => {
     const document = new DOMParser().parseFromString(indexHtml, 'text/html')
-    const script = document.querySelector('script[type="application/ld+json"]')
-    const data = JSON.parse(script?.textContent ?? '')
-    const graph = (data['@graph'] ?? []) as Array<Record<string, unknown>>
-    const entity = (id: string) => graph.find((item) => item['@id'] === id)
+    const dataBlocks = [...document.querySelectorAll('script[type="application/ld+json"]')]
+      .map((script) => JSON.parse(script.textContent ?? '')) as Array<Record<string, unknown>>
+    const data = dataBlocks.find((block) => Array.isArray(block['@graph']))
+    const graph = (data?.['@graph'] ?? []) as Array<Record<string, unknown>>
+    const entities = dataBlocks.flatMap((block) => (
+      Array.isArray(block['@graph']) ? block['@graph'] as Array<Record<string, unknown>> : [block]
+    ))
+    const entity = (id: string) => entities.find((item) => item['@id'] === id)
     const website = entity('https://kirkorino.com/#website')
-    const person = entity('https://kirkorino.com/#person')
-    const people = graph.filter((item) => item['@type'] === 'Person')
+    const people = entities.filter((item) => (
+      item['@type'] === 'Person' || (Array.isArray(item['@type']) && item['@type'].includes('Person'))
+    ))
+    const person = people[0]
     const organization = entity('https://optrizo.com/#organization')
 
     expect(data).toMatchObject({
