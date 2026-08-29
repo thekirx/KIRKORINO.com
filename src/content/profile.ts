@@ -27,6 +27,6 @@ export const portrait = {
  * one covers the how (one process, nothing templated). This one is the who.
  */
 export const aboutParagraphs = [
-  'I’m Kirk, a web designer and developer based in Manila. Most of my clients are places you’d actually walk into—restaurants, cafés, courts, clinics, and shops across the Philippines.',
+  'I’m Kirk Orino, known online as @kirkorino—a web developer, content creator, and founder of Optrizo based in Manila. Most of my clients are places you’d actually walk into—restaurants, cafés, courts, clinics, and shops across the Philippines.',
   'I make lifestyle content too, so I spend as much time on the other side of it: what makes someone save a post, trust a place, and actually turn up. That tends to show up in the work.',
 ]

@@ -43,18 +43,26 @@ describe('static SEO files', () => {
 
   it('publishes a connected identity graph using only verified profiles', () => {
     const document = new DOMParser().parseFromString(indexHtml, 'text/html')
-    const script = document.querySelector('script[type="application/ld+json"]')
-    const data = JSON.parse(script?.textContent ?? '')
-    const graph = (data['@graph'] ?? []) as Array<Record<string, unknown>>
-    const entity = (id: string) => graph.find((item) => item['@id'] === id)
+    const dataBlocks = [...document.querySelectorAll('script[type="application/ld+json"]')]
+      .map((script) => JSON.parse(script.textContent ?? '')) as Array<Record<string, unknown>>
+    const data = dataBlocks.find((block) => Array.isArray(block['@graph']))
+    const graph = (data?.['@graph'] ?? []) as Array<Record<string, unknown>>
+    const entities = dataBlocks.flatMap((block) => (
+      Array.isArray(block['@graph']) ? block['@graph'] as Array<Record<string, unknown>> : [block]
+    ))
+    const entity = (id: string) => entities.find((item) => item['@id'] === id)
     const website = entity('https://kirkorino.com/#website')
-    const person = entity('https://kirkorino.com/#person')
-    const organization = entity('https://www.optrizo.com/#organization')
+    const people = entities.filter((item) => (
+      item['@type'] === 'Person' || (Array.isArray(item['@type']) && item['@type'].includes('Person'))
+    ))
+    const person = people[0]
+    const organization = entity('https://optrizo.com/#organization')
 
     expect(data).toMatchObject({
       '@context': 'https://schema.org',
     })
     expect(graph).toHaveLength(3)
+    expect(people).toHaveLength(1)
     expect(website).toMatchObject({
       '@type': 'WebSite',
       '@id': 'https://kirkorino.com/#website',
@@ -66,11 +74,21 @@ describe('static SEO files', () => {
       '@type': 'Person',
       '@id': 'https://kirkorino.com/#person',
       name: 'Kirk Orino',
-      alternateName: ['Kirk Oriño', 'Dikie Kirk Orino'],
+      alternateName: [
+        'Kirk Oriño',
+        'Dikie Kirk Orino',
+        'Dikie Kirk Oriño',
+        'Dikie Orino',
+        'Dikie Oriño',
+        'kirkorino',
+      ],
       url: 'https://kirkorino.com/',
-      sameAs: ['https://www.tiktok.com/@kirkorino'],
-      owns: { '@id': 'https://www.optrizo.com/#organization' },
-      worksFor: { '@id': 'https://www.optrizo.com/#organization' },
+      sameAs: [
+        'https://www.tiktok.com/@kirkorino',
+        'https://www.linkedin.com/in/dikie-kirk-orino-a0b257319',
+      ],
+      owns: { '@id': 'https://optrizo.com/#organization' },
+      worksFor: { '@id': 'https://optrizo.com/#organization' },
     })
     expect(person?.hasOccupation).toEqual([
       { '@type': 'Occupation', name: 'Web Developer' },
@@ -80,18 +98,19 @@ describe('static SEO files', () => {
     expect(person?.knowsAbout).toEqual(expect.arrayContaining(['Web Design', 'Web Development', 'Responsive Development']))
     expect(organization).toMatchObject({
       '@type': 'Organization',
-      '@id': 'https://www.optrizo.com/#organization',
+      '@id': 'https://optrizo.com/#organization',
       name: 'Optrizo',
-      url: 'https://www.optrizo.com/',
+      url: 'https://optrizo.com/',
       founder: { '@id': 'https://kirkorino.com/#person' },
     })
 
-    const json = JSON.stringify(data)
-    expect(json).not.toContain('linkedin.com')
-    expect(json).not.toContain('instagram.com')
-    expect(json).not.toContain('facebook.com')
-    expect(json).not.toContain('"sameAs":[""]')
-    expect(json).not.toContain('"sameAs":["#"]')
+    const sameAs = person?.sameAs as string[]
+    expect(new Set(sameAs).size).toBe(sameAs.length)
+    expect(sameAs.filter((url) => url === 'https://www.linkedin.com/in/dikie-kirk-orino-a0b257319')).toHaveLength(1)
+    expect(sameAs).toEqual([
+      'https://www.tiktok.com/@kirkorino',
+      'https://www.linkedin.com/in/dikie-kirk-orino-a0b257319',
+    ])
   })
 
   it('allows the homepage and lists only its canonical URL', () => {

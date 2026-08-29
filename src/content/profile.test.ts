@@ -15,6 +15,15 @@ describe('profile content', () => {
     expect(aboutParagraphs[0]).toMatch(/I[’']m Kirk/)
   })
 
+  it('introduces Kirk’s complete public identity once in natural Profile copy', () => {
+    const bio = aboutParagraphs.join(' ')
+
+    expect(bio).toContain(
+      'I’m Kirk Orino, known online as @kirkorino—a web developer, content creator, and founder of Optrizo based in Manila.',
+    )
+    expect(bio.match(/known online as @kirkorino/g)).toHaveLength(1)
+  })
+
   it('does not restate the positioning band higher up the page', () => {
     // the two sections drifted into saying the same thing once already
     const bio = aboutParagraphs.join(' ').toLowerCase()
