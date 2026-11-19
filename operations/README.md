@@ -18,7 +18,7 @@ Stack: Next.js 16 (App Router) · Supabase (Postgres, Auth, row-level security) 
 ### 1. Supabase project
 
 1. Create a new project at [supabase.com](https://supabase.com) (region: Singapore is closest to Manila).
-2. **SQL Editor** → paste all of `supabase/migrations/0001_phase1.sql` → **Run**. That’s the only SQL; there are no emails to fill in.
+2. **SQL Editor** → paste all of `supabase/migrations/0001_phase1.sql` → **Run**. Then run `supabase/migrations/0002_grants.sql` the same way. There are no emails to fill in.
 3. **Authentication → URL Configuration**: Site URL `https://operations.kirkorino.com`; add redirect URLs `https://operations.kirkorino.com/auth/callback` and `http://localhost:3000/auth/callback`.
 
 ### 2. Google sign-in
