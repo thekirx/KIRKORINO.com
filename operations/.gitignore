@@ -40,6 +40,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local seed with real emails
-/supabase/seed.sql
 !.env.example

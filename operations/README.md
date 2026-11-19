@@ -2,7 +2,7 @@
 
 The team's internal workspace at **operations.kirkorino.com**. Phase 1 covers:
 
-- **Google sign-in** (invite only, personal Gmail is fine) and a **role picker** on first sign-in. General Manager and Finance stay locked until Kirk confirms.
+- **Google sign-in** with any Google account (personal Gmail is fine) and a **role picker** on first sign-in. Every new person waits for Kirk’s approval; the first account to sign in becomes the owner.
 - **Home**: daily greeting pop-up, Needs your OK (Kirk), your next steps as cards, Today, Add a task, Who’s in, What just happened.
 - **Outreach**: the 7-stage flow (Prospect → Researched → Contacted → Interested → Meeting → Proposal → Won), off-list reasons, prospects, research facts, email drafts from templates, call/email logging, a Gmail thread link, and Won → project automatically.
 - **Team & roles** (Kirk only): add people by Google email, roles and access per area, new roles (e.g. interns), leave dates, moving urgent work, and the daily greeting with seasonal presets.
@@ -18,10 +18,8 @@ Stack: Next.js 16 (App Router) · Supabase (Postgres, Auth, row-level security) 
 ### 1. Supabase project
 
 1. Create a new project at [supabase.com](https://supabase.com) (region: Singapore is closest to Manila).
-2. **SQL Editor** → paste all of `supabase/migrations/0001_phase1.sql` → **Run**.
-3. Copy `supabase/seed.example.sql` to `supabase/seed.sql` (it is git-ignored), put in the four real Google emails, paste it into the SQL Editor → **Run**. Never commit real emails: this repository is public.
-4. **Authentication → Hooks** → add **Before User Created** → type **Postgres** → schema `public` → function `hook_before_user_created`. This is what blocks Google accounts that aren’t on the team.
-5. **Authentication → URL Configuration**: Site URL `https://operations.kirkorino.com`; add redirect URLs `https://operations.kirkorino.com/auth/callback` and `http://localhost:3000/auth/callback`.
+2. **SQL Editor** → paste all of `supabase/migrations/0001_phase1.sql` → **Run**. That’s the only SQL; there are no emails to fill in.
+3. **Authentication → URL Configuration**: Site URL `https://operations.kirkorino.com`; add redirect URLs `https://operations.kirkorino.com/auth/callback` and `http://localhost:3000/auth/callback`.
 
 ### 2. Google sign-in
 
@@ -39,7 +37,7 @@ Stack: Next.js 16 (App Router) · Supabase (Postgres, Auth, row-level security) 
 
 ### 4. First sign-in
 
-Kirk signs in first (already admin). Everyone else signs in and picks a role; Kirk confirms General Manager or Finance from **Needs your OK** on Home.
+**Kirk must sign in first.** The first Google account to sign in becomes the owner (General Manager, can’t be demoted). After that, anyone with a Google account can sign in, pick a role and wait; Kirk approves or declines each person from **Needs your OK** on Home. Nobody sees any team data until Kirk approves them. Kirk can also let someone straight in by adding their Google email with a role in Team & roles.
 
 ---
 
@@ -54,7 +52,7 @@ npm run dev                  # http://localhost:3000
 
 ## How access works
 
-- `members` holds who may sign in (Google email), their role and status (`invited`, `pending_confirm`, `active`, `on_leave`, `removed`).
+- `members` gets a row automatically on first Google sign-in, with the person’s role and status (`invited`, `pending_confirm`, `active`, `on_leave`, `removed`).
 - `role_permissions` sets each role’s level per area: `hidden`, `view`, `edit`, `approve`. Only admins can change roles or permissions.
 - Every table has row-level security that calls `can(area, level)` / `is_admin()`, so the rules hold even outside the app. Kirk (`is_owner`) can’t be demoted or removed.
 - History is written by database triggers (stage moves, owner changes, logged calls and emails) into `activity`.

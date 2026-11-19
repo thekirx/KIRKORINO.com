@@ -93,7 +93,7 @@ export default async function Team({ searchParams }: { searchParams: Promise<{ s
       </div>
 
       <section className="card" style={{ marginTop: 16 }}>
-        <div className="box-h"><h2 className="cond">Add someone</h2></div>
+        <div className="box-h"><h2 className="cond">Let someone straight in</h2></div>
         <form action={addMember} className="box-b">
           <div className="row3">
             <div className="field"><label htmlFor="am-name">First name</label><input id="am-name" name="name" className="input" required /></div>
@@ -102,7 +102,7 @@ export default async function Team({ searchParams }: { searchParams: Promise<{ s
               <select id="am-role" name="role_id" className="input" defaultValue=""><option value="">They choose on first sign-in</option>{(roles ?? []).map((r) => <option key={r.id} value={r.id}>{r.short_name}</option>)}</select></div>
           </div>
           <button className="btn b-blue"><Icon name="plus" />Add to team</button>
-          <p className="fine">Only Google accounts on this list can sign in. Personal Gmail works.</p>
+          <p className="fine">Optional: people can also just sign in with Google and ask to join. Adding them here with a role lets them straight in.</p>
         </form>
       </section>
 

@@ -5,7 +5,6 @@ import { supabaseServer } from "@/lib/supabase/server";
 export async function GET(request: NextRequest) {
   const url = request.nextUrl;
   const code = url.searchParams.get("code");
-  // The sign-up gate (Auth hook) rejects strangers before a session exists.
   if (url.searchParams.get("error")) {
     return NextResponse.redirect(new URL("/signin?error=not_on_team", url.origin));
   }

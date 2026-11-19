@@ -6,7 +6,7 @@ import { GoogleButton } from "./GoogleButton";
 export const metadata: Metadata = { title: "Sign in" };
 
 const ERRORS: Record<string, string> = {
-  not_on_team: "This Google account isn’t on the team. Ask Kirk to add you, then try again.",
+  not_on_team: "This Google account doesn’t have access right now. Ask Kirk to check Team & roles.",
   auth: "Sign-in didn’t finish. Try again, and pick the Google account Kirk added.",
 };
 
@@ -27,7 +27,7 @@ export default async function SignIn({ searchParams }: { searchParams: Promise<{
           <li><b className="n">2</b><span>First time only: choose your role.</span></li>
           <li><b className="n">3</b><span>You land on your own home page.</span></li>
         </ol>
-        <p className="fine">Invite only. There’s no sign-up form.</p>
+        <p className="fine">Any Google account can sign in. Kirk approves new people before they see anything.</p>
       </div></div>
     </div>
   );

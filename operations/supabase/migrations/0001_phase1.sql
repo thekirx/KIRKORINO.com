@@ -245,12 +245,30 @@ create table public.greeting_seen (
 );
 
 -- ───────────────────────── Triggers ─────────────────────────
--- Link a member row to the Google account on first sign-in.
+-- Any Google account can sign in. On first sign-in:
+--  • if Kirk pre-added this email in Team & roles, link to that row;
+--  • else, if nobody owns the workspace yet, this person becomes the owner (General Manager);
+--  • else, create a new member who picks a role and waits for Kirk's OK.
 create or replace function public.link_member_on_signup()
 returns trigger language plpgsql security definer set search_path = public as $$
+declare
+  display_name text := split_part(coalesce(
+    nullif(new.raw_user_meta_data->>'full_name', ''),
+    nullif(new.raw_user_meta_data->>'name', ''),
+    split_part(new.email, '@', 1)), ' ', 1);
 begin
   update public.members set user_id = new.id
   where google_email = new.email::citext and user_id is null;
+  if found then return new; end if;
+
+  if not exists (select 1 from public.members where is_owner) then
+    insert into public.members (user_id, google_email, name, role_id, status, is_owner)
+    select new.id, new.email, display_name, id, 'active', true from public.roles where key = 'gm';
+  else
+    insert into public.members (user_id, google_email, name, status)
+    values (new.id, new.email, display_name, 'invited')
+    on conflict (google_email) do nothing;
+  end if;
   return new;
 end $$;
 
@@ -313,7 +331,8 @@ create trigger contact_logged after insert on public.contact_log
 for each row execute function public.contact_logged();
 
 -- ───────────────────────── RPCs ─────────────────────────
--- First sign-in: pick a role. GM/Finance wait for Kirk; others unlock now.
+-- First sign-in: pick a role. Because anyone with Google can sign in, every
+-- new person waits for Kirk's OK before they see anything.
 create or replace function public.choose_role(p_role_key text)
 returns member_status
 language plpgsql security definer set search_path = public as $$
@@ -326,14 +345,12 @@ begin
   if r.id is null then raise exception 'Unknown role'; end if;
   update public.members
      set role_id = r.id,
-         status = (case when r.needs_confirm then 'pending_confirm' else 'active' end)::member_status
+         status = 'pending_confirm'
    where id = m.id
    returning status into m.status;
-  if r.needs_confirm then
-    insert into public.approvals (area, title, detail, link, requested_by)
-    values ('team', m.name || ' chose the ' || r.short_name || ' role',
-            'First sign-in · confirm to unlock it', '/team', m.id);
-  end if;
+  insert into public.approvals (area, title, detail, link, requested_by)
+  values ('team', m.name || ' wants to join as ' || r.short_name,
+          m.google_email || ' · approve to let them in', '/team', m.id);
   return m.status;
 end $$;
 
@@ -442,28 +459,6 @@ create policy greeting_admin on public.greeting for update to authenticated usin
 create policy seen_own on public.greeting_seen for all to authenticated
   using (member_id = public.my_member_id()) with check (member_id = public.my_member_id());
 
--- ───────────────────────── Sign-up gate (Auth hook) ─────────────────────────
--- Rejects any Google account whose email Kirk hasn't added to members.
--- Turn it on in: Authentication → Hooks → "Before User Created" → Postgres → public.hook_before_user_created
-create or replace function public.hook_before_user_created(event jsonb)
-returns jsonb
-language plpgsql security definer set search_path = public as $$
-declare email text := lower(coalesce(event->'user'->>'email', ''));
-begin
-  if exists (select 1 from public.members where google_email = email::citext and status <> 'removed') then
-    return '{}'::jsonb;
-  end if;
-  return jsonb_build_object('error', jsonb_build_object(
-    'http_code', 403,
-    'message', 'This Google account isn''t on the team. Ask Kirk to add you.'));
-end $$;
-
-grant execute on function public.hook_before_user_created(jsonb) to supabase_auth_admin;
-revoke execute on function public.hook_before_user_created(jsonb) from authenticated, anon, public;
-grant usage on schema public to supabase_auth_admin;
-grant select on public.members to supabase_auth_admin;
-create policy members_auth_hook on public.members for select to supabase_auth_admin using (true);
-
 -- Kirk saved a new greeting and wants everyone to see it again today.
 create or replace function public.reset_greeting_seen(p_day date)
 returns void language plpgsql security definer set search_path = public as $$
@@ -471,3 +466,11 @@ begin
   if not public.is_admin() then raise exception 'Only Kirk can do this'; end if;
   delete from public.greeting_seen where seen_on = p_day;
 end $$;
+
+-- ───────────────────────── Starter email templates ─────────────────────────
+-- {business_name}, {hook} (newest research fact) and {sender} are filled in per prospect.
+insert into public.templates (name, kind, subject, body) values
+  ('Intro · local business', 'intro', 'An idea for {business_name}',
+   E'Hi there,\n\nI came across {business_name} and noticed {hook}.\n\nWe build simple websites and booking or ordering pages for local businesses, and I sketched a one-page idea for you. Happy to send it over if useful.\n\nThanks,\n{sender}'),
+  ('Follow-up · gentle nudge', 'follow_up', 'Re: An idea for {business_name}',
+   E'Hi again,\n\nJust floating this back up in case it got buried. The idea was built around {hook}. Would a quick 10-minute call this week work?\n\n{sender}');
